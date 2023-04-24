@@ -1,0 +1,17 @@
+<view class="order_main">
+	<view wx:for="{{CommentsList}}" wx:key="id" class="order_item" >
+		<view class="part">
+			<navigator url="/pages/activity_detail/index?id={{item.id}}">
+				<view class="order_no_row">
+					<view class="order_no_value">
+			<image wx:if="{{item.state==0}}"  src="../../icons/热门活动.png"></image>
+            <image wx:if="{{item.state==1}}"  src="../../icons/活动_活动管理.png"></image>
+            <image wx:if="{{item.state==2}}" src="../../icons/节庆活动.png"></image>{{item.name}}
+					</view>
+					<view class="order_time_value">查 看</view>
+				</view>
+			</navigator>
+		</view>
+	</view>
+
+</view>

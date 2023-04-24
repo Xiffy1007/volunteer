@@ -1,0 +1,16 @@
+<view class="order_main">
+	<view wx:for="{{CommentsList}}" wx:key="id" class="order_item" >
+		<view class="part">
+			<navigator url="/pages/news_detail/index?id={{item.newsId}}">
+				<view class="order_no_row">
+					<view class="order_no_value">
+						<image src="../../icons/评论1.png"></image>{{item.content}}
+					</view>
+					<view class="order_time_value">查 看</view>
+				</view>
+			</navigator>
+
+		</view>
+	</view>
+
+</view>

@@ -1,0 +1,22 @@
+<view class="order_main">
+	<view wx:if="{{total==0}}"class="p">
+    <image src="../../icons/暂无数据.png"></image>
+    <view style="opacity: 0.4;">您还没有任何收藏</view>
+    </view>
+<view wx:for="{{newsList}}" wx:key="id" class="order_item" wx:if="{{total!=0}}">
+<view class="part">
+	<navigator url="/pages/news_detail/index?id={{item.id}}">
+		<view class="order_no_row">
+			<view class="order_no_value">
+				<image src="../../icons/_col.png"></image>{{item.name}}
+			</view>
+			<view class="order_time_value">查看详情 ></view>
+		</view>	
+	</navigator>
+	<view class="order_time_row">
+		<view style="margin-left: 40rpx;margin-top: 10rpx;"><button data-index="{{item.id}}"  bindtap="delete" size="mini">取消收藏</button></view> 
+			<view class="order_time_text" style="margin-right: 10rpx;">{{item.createTime}}</view>
+		</view>
+</view>
+</view>
+</view>

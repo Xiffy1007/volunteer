@@ -1,0 +1,41 @@
+
+.order_main .order_item {
+  padding: 20rpx;
+  border-bottom: 10rpx solid #ededed;
+
+}
+.order_main .order_item .order_no_row {
+  display: flex;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}
+.order_no_row image{
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 20rpx;
+}
+
+.order_main .order_item .order_time_row {
+  display: flex;
+  margin-top: 30rpx;
+  padding: 0 10rpx;
+  color: grey;
+  font-size: 25rpx;
+  justify-content: space-between;
+
+}
+.p{
+  text-align: center;
+  margin-top: 300rpx;
+  font-size: 40rpx;
+  color:grey;
+
+  
+}
+.p image{
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.2;
+
+}

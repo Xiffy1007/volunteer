@@ -1,0 +1,67 @@
+<form bindsubmit="formSubmit">
+  <view class='userinfolist'>
+    <button class="avatar">
+      <image wx:if="{{sex==0}}" src="../../icons/girl.png"></image>
+      <image wx:if="{{sex==1}}" src="../../icons/boy.png"></image>
+
+    </button>
+
+    <view class='baseInfo'>
+      <text>基本信息</text>
+    </view>
+
+    <view class='singlelist'>
+      <text>姓名</text>
+      <input name="userName" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入真实姓名' value="{{userinfo.userName}}"></input>
+    </view>
+
+    <view class='singlelist'>
+      <text>性别</text>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" name="sex">
+          <radio value="1" checked="{{userinfo.sex==1?'checked':''}}" />男
+        </label>
+        <label class="radio" name="sex">
+          <radio value="0" checked="{{userinfo.sex==0?'checked':''}}" />女
+        </label>
+      </radio-group>
+    </view>
+
+    <view class='singlelist'>
+      <text>手机</text>
+      <input name="phone" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入手机号' value="{{userinfo.phone}}"></input>
+    </view>
+
+    <view class='singlelist'>
+      <text>邮箱</text>
+      <input name="email" type='email' placeholder-style='font-size:28rpx;' placeholder='请输入邮箱' value="{{userinfo.email}}"></input>
+    </view>
+
+    <view class='baseInfo'>
+      <text>验证信息</text>
+    </view>
+
+    <view class='singlelist'>
+      <text>学号</text>
+      <input name="sno" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入学号' value="{{userinfo.sno}}"></input>
+    </view>
+
+    <view class='singlelist'>
+      <text>学院</text>
+      <input name="college" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入学院' value="{{userinfo.college}}"></input>
+    </view>
+
+    <view class='singlelist'>
+      <text>专业</text>
+      <input name="major" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入专业' value="{{userinfo.major}}"></input>
+    </view>
+
+    <view class='singlelist'>
+      <text>班级</text>
+      <input name="classinfo" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入班级' value="{{userinfo.classinfo}}"></input>
+    </view>
+
+  </view>
+
+  <button class="submitbtn" style="width: 100%;" form-type='submit'>提 交</button>
+</form>

@@ -1,0 +1,22 @@
+/* pages/notice_detail/index.wxss */
+page{
+    background-color: #ededed;
+}
+.detail{
+    width: 95%;
+    height: 97vh;
+    background-color: white;
+    margin: 20rpx auto;
+    border-radius: 20rpx;
+    position: relative;
+}
+.detail image{
+    width: 150rpx;
+    height: 150rpx;
+    position: absolute;
+z-index: 2;
+display: block;
+opacity: 0.6;
+right: 0;
+margin: 30rpx;
+}

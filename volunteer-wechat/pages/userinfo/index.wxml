@@ -1,0 +1,57 @@
+<!--pages/userinfo/index.wxml-->
+<!--你看下面哪些留着合适就留哪些 然后加一个头像-->
+<view class="p1">
+	<view class="user_info">
+			<image class="user_icon"  wx:if="{{userinfo.sex==0}}" src="../../icons/girl.png" ></image>
+		<image class="user_icon"  wx:if="{{userinfo.sex==1}}"  src="../../icons/boy.png"></image>
+			<view style="margin-top: 10rpx;">{{userinfo.userName}}</view>
+	</view>
+<view class="p2">
+</view>
+<view class="p3">
+<view style="margin-left: 40rpx;">
+<view class="p4">
+<view  style="flex: 1;padding-left: 80rpx;">学号: {{userinfo.sno}}</view> 
+<view  style="flex: 1;padding-left: 80rpx">班级: {{userinfo.classinfo}}</view>
+</view>
+<view class="p4">
+<view style="flex: 1;padding-left: 80rpx"> 学院: {{userinfo.college}}</view>
+<view style="flex: 1;padding-left: 80rpx">专业: {{userinfo.major}}</view>
+</view>
+<view class="p4"><view  style="flex: 1;padding-left: 80rpx">志愿时长: {{userinfo.duration}}</view> 
+<view  style="flex: 1;padding-left: 80rpx">阳光信用: {{userinfo.credit}}</view>
+</view>
+
+<view class="p4"><view  style="flex: 1;padding-left: 80rpx"> 电话: {{userinfo.phone}}</view>
+<view style="flex: 1;padding-left: 80rpx">邮箱: {{userinfo.email}}</view>
+</view>
+</view>
+<view class="p5">
+<view class="left">
+<image src="../../icons/活动1.png"></image>
+<view>Ta的活动</view> 
+</view>
+<view class="right"><navigator wx:if="{{comlist.length>0}}" url="/pages/useractivity/index?id={{userinfo.id}}">查看更多 ></navigator></view>
+</view>
+<view  wx:for="{{actlist}}" wx:for-item="item" wx:key="id">
+	<navigator  class="p6" url="/pages/activity_detail/index?id={{item.id}}">
+		<view class="content">{{item.name}}</view>
+		<view class="time">{{item.createTime}}</view>
+	</navigator>
+</view>
+
+<view class="p5">
+<view class="left">
+<image src="../../icons/评论1.png"></image>
+<view>Ta的评论</view> 
+</view>
+<view class="right"><navigator wx:if="{{comlist.length>0}}" url="/pages/usercomment/index?id={{userinfo.id}}">查看更多 ></navigator></view>
+</view>
+<view wx:for="{{comlist}}" wx:for-item="item" wx:key="id">
+	<navigator class="p6" url="/pages/news_detail/index?id={{item.newsId}}">
+		<view class="content">{{item.content}}</view>
+		<view class="time">{{item.createTime}}</view>
+	</navigator>
+</view>
+</view>
+</view>

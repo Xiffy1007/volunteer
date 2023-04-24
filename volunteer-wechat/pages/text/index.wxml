@@ -1,0 +1,1 @@
+<view bindtap='getCurrentLocal'>获取当前位置</view>

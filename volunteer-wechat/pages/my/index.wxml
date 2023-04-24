@@ -1,0 +1,79 @@
+<view class="user_info_wrap">
+	<navigator wx:if="{{userinfo}}" class="user_img_wrap" url="/pages/userinfo/index?id={{userinfo.id}}">
+		<view class="user_info">
+			<image class="user_icon" wx:if="{{userinfo.sex==0}}" src="../../icons/girl.png"></image>
+			<image class="user_icon" wx:if="{{userinfo.sex==1}}" src="../../icons/boy.png"></image>
+			<view class="user_name">{{userinfo.userName}}</view>
+		</view>
+	</navigator>
+
+
+	<button wx:if="{{!userinfo}}" class="loginBtn" type="primary" bindtap="login">登录</button>
+</view>
+<view class="user_content">
+	<view class="tool">
+		<navigator wx:if="{{userinfo}}" url="../check_result/index">
+			<view class="iconfont" style="margin-top: 4rpx;">
+				<image style="width: 67rpx;height: 67rpx;" src="../../icons/材料审核中.png"></image>
+			</view>
+			<view class="s1">我的审核</view>
+		</navigator>
+		<navigator wx:if="{{userinfo}}" url="../credit/index">
+			<view class="iconfont">
+				<image src="../../icons/太阳.png"></image>
+			</view>
+			<view class="s1">阳光信用</view>
+		</navigator>
+		<navigator wx:if="{{!userinfo}}" url="../login/index">
+			<view class="iconfont" style="margin-top: 4rpx;">
+				<image style="width: 67rpx;height: 67rpx;" src="../../icons/材料审核中.png"></image>
+			</view>
+			<view class="s1">我的审核</view>
+		</navigator>
+	
+		<navigator url="../ranking/index">
+			<view class="iconfont">
+				<image  src="../../icons/排行榜2.png"></image>
+			</view>
+			<view class="s1">排行榜</view>
+		</navigator>
+		<navigator url="../notice/index">
+			<view class="iconfont">
+				<image src="../../icons/wnt_公告.png"></image>
+			</view>
+			<view class="s1">公告</view>
+		</navigator>
+	</view>
+	<navigator wx:if="{{userinfo}}" class="outlogin2"  url="../duration/index">
+		<image src="../../icons/当志愿者 (1).png"></image>志愿时长
+	</navigator>
+
+	<view wx:if="{{userinfo}}" class="information" bindtap="updateinfo">
+		<image src="../../icons/资料.png"></image>修改资料
+	</view>
+
+	<view wx:if="{{userinfo}}" class="outlogin" bindtap="myActs">
+		<image src="../../icons/huodong.png"></image>我的活动
+	</view>
+	<view wx:if="{{userinfo}}" class="outlogin" bindtap="mycom">
+		<image src="../../icons/xiaoxi.png"></image>我的评论
+	</view>
+	<view wx:if="{{userinfo}}" class="outlogin" bindtap="mycol">
+		<image src="../../icons/收藏.png"></image>我的收藏
+	</view>
+	<view wx:if="{{userinfo}}" class="outlogin" bindtap="mylike">
+		<image src="../../icons/点赞.png"></image>我的点赞
+	</view>
+
+	<view wx:if="{{userinfo}}" class="outlogin1" bindtap="logout">
+		退 出 登 录
+	</view>
+</view>
+
+<!-- 
+
+<view wx:else>
+	<button class="loginBtn" type="primary" bindtap="updateinfo">修改资料</button>
+	<button class="loginBtn" type="primary" bindtap="logout">退出登录</button>
+</view>
+<button class="loginBtn" type="primary"  bindtap="notice">公告</button> -->

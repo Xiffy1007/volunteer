@@ -1,0 +1,15 @@
+<view class="title-item"></view>
+<view class="countdown-item">
+  <view class="countdown-title">
+    <block>
+      <text class='tui-conutdown-box'>{{days}}</text>
+      <text class="countdown-text">天</text>
+      <text class='tui-conutdown-box'>{{hours}}</text>
+      <text class="countdown-text">时</text>
+      <text class='tui-conutdown-box'>{{minutes}}</text>
+      <text class="countdown-text">分</text>
+      <text class='tui-conutdown-box'>{{seconds}}</text>
+      <text class="countdown-text">秒</text>
+    </block>
+  </view>
+</view>

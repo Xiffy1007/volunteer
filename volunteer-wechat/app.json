@@ -1,0 +1,86 @@
+{
+  "pages": [
+    "pages/my/index",
+    "pages/index/index",
+    "pages/news/index",
+    "pages/activity/index",
+    "pages/login/index",
+    "pages/update_userinfo/index",
+    "pages/search/index",
+    "pages/notice/index",
+    "pages/notice_detail/index",
+    "pages/activity_detail/index",
+    "pages/news_detail/index",
+    "pages/check/index",
+    "pages/myacts/index",
+    "pages/mycomment/index",
+    "pages/usercomment/index",
+    "pages/credit/index",
+    "pages/ranking/index",
+    "pages/duration/index",
+    "pages/text/index",
+    "pages/time/index",
+    "pages/check_result/index",
+    "pages/mycheck/index",
+    "pages/check_detail/index",
+    "pages/userinfo/index",
+    "pages/useractivity/index",
+    "pages/mycollect/index",
+    "pages/mylike/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#27b485",
+    "navigationBarTitleText": "江大AI志愿",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#27b485ad",
+    "backgroundColor": "#fafafa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icons/_home.png",
+        "selectedIconPath": "icons/首页-首页.png"
+      },
+      {
+        "pagePath": "pages/activity/index",
+        "text": "活动",
+        "iconPath": "icons/活动 想去.png",
+        "selectedIconPath": "icons/活动 想去 (2).png"
+      },
+      {
+        "pagePath": "pages/check/index",
+        "iconPath": "icons/plus-circle-fill (2).png",
+        "selectedIconPath": "icons/plus-circle-fill (2).png",
+        "iconWidth": "150",
+        "iconHeight": "150"
+      },
+      {
+        "pagePath": "pages/news/index",
+        "text": "新闻",
+        "iconPath": "icons/24gl-newspaper4.png",
+        "selectedIconPath": "icons/24gl-newspaper4 (2).png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "icons/我的-线.png",
+        "selectedIconPath": "icons/我的-线 (1).png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

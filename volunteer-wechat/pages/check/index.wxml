@@ -1,0 +1,17 @@
+<form bindsubmit="formSubmit">
+<view class="p1">
+<view class="in">
+  <textarea name="content" type='text' placeholder-style='font-size:28rpx;' placeholder='请输入描述' value="{{content}}"></textarea>
+</view>
+  <view class="img-v weui-uploader__bd"style="height:250rpx">
+    <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+      <image class='weui-uploader__img' src="{{item}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImg">
+        <icon type='cancel' class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></icon>
+      </image>
+    </view>
+  </view>
+  <!-- 用来提示用户上传图片 -->
+</view>
+<button bindtap="chooseImg" style="width: 90%;background-color: var(--themeColor);border-radius: 20px;"> 上 传 图 片</button>
+<button form-type='submit' style="width: 90%;border-radius: 20px;">提 交 资 料</button>
+</form>

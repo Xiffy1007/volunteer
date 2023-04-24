@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/basic.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/my.css" rel="stylesheet">
+    <link href="../css/element/index.css" rel="stylesheet">
+    <link href="../css/quill.snow.css" rel="stylesheet">
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper" v-cloak>
+    <nav class="navbar navbar-default navbar-cls-top" style="margin-bottom: 0">
+        <div class=navbar-header">
+            <a class="navbar-brand" href=" index.html">江大青协志愿管理平台</a>
+        </div>
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn- info" @click="logout" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="adminInfo.html" class="btn btn-info" title="跳转到个人信息">
+                <i class="fa fa-user fa-2x"></i>
+            </a>
+        </div>
+        <div class="header-right" style="padding-top: 25px">
+            欢迎您，{{admin.adminName}}
+        </div>
+    </nav>
+    <nav class="navbar-default navbar-side">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="index.html"><i class="fa fa-bar-chart"></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-yelp"></i>信息展示<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li><a href="userInfo.html"><i class="fa fa-users"></i>用户信息</a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i>志愿活动<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="typeInfo.html"><i class="fa fa-table"></i>活动类别</a></li>
+                                <li><a href="activity.html"><i class="fa fa-file-text"></i>活动详情</a></li>
+                                <li><a href="signup.html"><i class="fa fa-table"></i>报名详情</a></li>
+
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-check-square"></i>审核<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="check.html"><i class="fa fa-check-square-o"></i>活动审核</a></li>
+                                <li><a href="filecheck.html"><i class="fa fa-file-image-o"></i>材料审核</a> </li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#"><i class="fa fa-newspaper-o"></i>新闻<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="newstypeInfo.html"><i class="fa fa-table"></i>新闻类别</a></li>
+                                <li><a class="active-menu" href="allnews.html"><i class="fa fa-file-text-o"></i>新闻详情</a>
+                                </li>
+                                <li><a href="mynews.html"><i class="fa fa-book"></i>我的新闻</a></li>
+                                <li><a href="commentInfo.html"><i class="fa fa-comments"></i>评论信息</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="notice.html"><i class="fa fa-bullhorn"></i>公告信息</a></li>
+
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-pie-chart"></i>数据分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li><a href="completeness.html"><i class="fa fa-check-circle"></i>活动完成度</a></li>
+                        <li><a href="rank.html"><i class="fa fa-signal"></i>用户排名</a></li>
+                    </ul>
+
+                </li>
+                <li><a href="#"><i class="fa fa-cogs"></i>我的<span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level collapse in">
+                        <li><a href="adminInfo.html"><i class="fa fa-user"></i>个人信息</a></li>
+                        <li><a href="updatePassword.html"><i class="fa fa-edit"></i>修改密码</a></li>
+                        <li><a href="javascript:void(0)" @click="logout"><i class="fa fa-power-off"></i>退出登录</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"  v-if="CHANGE==1">
+                            新闻信息列表({{pageInfo.total}})
+                        </div>
+                        <div class="panel-heading"  v-if="CHANGE==0">
+                            新闻信息列表({{pageInfo1.total}})
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="nx-table-header">
+                                    <button class="btn btn-sm btn-primary" v-on:click="add()">新增</button>
+                                    <button type="button" style="float: right" v-on:click="loadTable(1)">搜索</button>
+
+                                    <input type="text" placeholder="请输入搜索内容" v-model="name" @keyup.enter="loadTable(1)">
+                                </div>
+                                <div style="margin-bottom: 30px">
+                                    排序方式<select v-model="order" style="margin-right:20px">
+                                    <option :value="a.id" v-for="a in orderList">
+                                        {{a.name}}
+                                    </option>
+                                </select>
+                                    开始时间<input type="datetime-local" step="1" placeholder="开始时间" v-model="Start">
+                                    —— 截止时间<input type="datetime-local" step="1" placeholder="截止时间" v-model="End"
+                                                  style="margin-right: 10px">
+                                    新闻类别<select v-model="Leibie" style="margin-right: 10px">
+                                    <option :value="a.id" v-for="a in activityClass">
+                                        {{a.name}}
+                                    </option>
+                                </select>
+                                    <button class="btn btn-sm btn-primary" v-on:click="JIANSUO(1)">检索</button>
+
+                                </div>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>新闻标题</th>
+                                        <th>发布时间</th>
+                                        <th>点赞数</th>
+                                        <th>评论数</th>
+                                        <th>收藏数</th>
+                                        <th>封面图</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody v-for="obj in objs">
+                                    <tr>
+                                        <td>{{obj.id}}</td>
+                                        <td>{{obj.name}}</td>
+                                        <td>{{obj.createTime}}</td>
+                                        <td>{{obj.likeNum}}&nbsp&nbsp
+                                            <button class="btn btn-primary btn-xs"
+                                                    v-on:click="detail_like(obj.id,obj.likeNum)">查看
+                                            </button>
+                                        </td>
+                                        <td>{{obj.comNum}}&nbsp&nbsp
+                                            <button class="btn btn-primary btn-xs"
+                                                    v-on:click="detail_com(obj.id,obj.comNum)">查看
+                                            </button>
+                                        </td>
+                                        <td>{{obj.colNum}}&nbsp&nbsp
+                                            <button class="btn btn-primary btn-xs"
+                                                    v-on:click="detail_col(obj.id,obj.colNum)">查看
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-xs"
+                                                    v-on:click="look(obj.id)">预览
+                                            </button>
+
+                                        </td>
+                                        <td>
+                                            <button v-if="obj.adminId==admin.id" class="btn btn-warning btn-xs"
+                                                    v-on:click="init(obj)">编辑
+                                            </button>
+                                            <button v-if="obj.adminId==admin.id" class="btn btn-danger btn-xs"
+                                                    v-on:click="del(obj.id)">删除
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <ul class="pagination" v-if="CHANGE==1">
+                                    <li class="page-item" v-bind:class="{disabled:preActive}">
+                                        <a class="page-link" href="javascript:void(0)"
+                                           v-on:click="loadTable(pageInfo.pageNum-1)">上一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" v-if="pageInfo.pageNum > 1" href="javascript:void(0)"
+                                           v-on:click="loadTable(pageInfo.pageNum - 1)">{{pageInfo.pageNum - 1}}</a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript:void(0)">{{pageInfo.pageNum}}</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" v-if="pageInfo.hasNextPage" href="javascript:void(0)"
+                                           v-on:click="loadTable(pageInfo.pageNum + 1) ">{{pageInfo.pageNum +1}}</a>
+                                    </li>
+                                    <li class="page-item" v-bind:class="{disabled:nextActive}">
+                                        <a class="page-link" href="javascript:void(0)"
+                                           v-on:click="loadTable(pageInfo.hasNextPage?(pageInfo.pageNum + 1):pageInfo.pageNum)">下一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" style="color: black"
+                                        >共{{pageInfo.pages}}页，当前第{{pageInfo.pageNum}}页，共{{objs.length}}条数据</a>
+                                    </li>
+                                </ul>
+                                <ul class="pagination"  v-if="CHANGE==0">
+                                    <li class="page-item" v-bind:class="{disabled:preActive1}">
+                                        <a class="page-link" href="javascript:void(0)"
+                                           v-on:click="JIANSUO(pageInfo1.pageNum-1)">上一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" v-if="pageInfo1.pageNum > 1" href="javascript:void(0)"
+                                           v-on:click="JIANSUO(pageInfo1.pageNum - 1)">{{pageInfo1.pageNum - 1}}</a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript:void(0)">{{pageInfo1.pageNum}}</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" v-if="pageInfo1.hasNextPage" href="javascript:void(0)"
+                                           v-on:click="JIANSUO(pageInfo1.pageNum + 1) ">{{pageInfo1.pageNum +1}}</a>
+                                    </li>
+                                    <li class="page-item" v-bind:class="{disabled:nextActive1}">
+                                        <a class="page-link" href="javascript:void(0)"
+                                           v-on:click="JIANSUO(pageInfo1.hasNextPage?(pageInfo1.pageNum + 1):pageInfo1.pageNum)">下一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" style="color: black"
+                                        >共{{pageInfo1.pages}}页，当前第{{pageInfo1.pageNum}}页，共{{objs.length}}条数据</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="like_mod">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">点赞详情（{{likeNum}}）</span>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户ID</th>
+                            <th>姓名</th>
+                            <th>专业</th>
+                            <th>班级</th>
+                            <th>联系方式</th>
+                            <th>点赞时间</th>
+
+                        </tr>
+                        </thead>
+                        <tbody v-for="obj in likeList">
+                        <tr>
+
+                            <td>{{obj.id}}</td>
+                            <td>{{obj.userName}}</td>
+                            <td>{{obj.major}}</td>
+                            <td>{{obj.classinfo}}</td>
+                            <td>{{obj.phone}}</td>
+                            <td>{{obj.createTime}}</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="col_mod">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">收藏详情（{{colNum}}）</span>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户ID</th>
+                            <th>姓名</th>
+                            <th>专业</th>
+                            <th>班级</th>
+                            <th>联系方式</th>
+                            <th>收藏时间</th>
+
+                        </tr>
+                        </thead>
+                        <tbody v-for="obj in colList">
+                        <tr>
+
+                            <td>{{obj.id}}</td>
+                            <td>{{obj.userName}}</td>
+                            <td>{{obj.major}}</td>
+                            <td>{{obj.classinfo}}</td>
+                            <td>{{obj.phone}}</td>
+                            <td>{{obj.createTime}}</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="com_mod">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">评论详情（{{comNum}}）</span>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户ID</th>
+                            <th>姓名</th>
+                            <th>评论内容</th>
+                            <th>评论时间</th>
+                            <th>操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody v-for="obj in comList">
+                        <tr>
+                            <td>{{obj.userId}}</td>
+                            <td>{{obj.userName}}</td>
+                            <td>{{obj.content}}</td>
+                            <td>{{obj.createTime}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-xs" v-on:click="delcom(obj.id)">删除</button>
+
+                            </td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="imageModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">图片预览</span>
+                    <button type="button" class="close" data-dismiss="modal" @click="cancel">x</button>
+                </div>
+                <div class="modal-body" id="view-img" style="text-align: center" >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="mod">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">新闻详情</span>
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" id="modal-id" name="modal-id">
+                    <div class="form-group" id="author">
+                        <div class="col-sm-3 control-label">作者</div>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-adminId" name="modal-name" class="form-control" readonly >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 control-label">新闻标题</div>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-name" name="modal-name" class="form-control"
+                                   placeholder="请输入新闻标题">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 control-label">新闻类别</div>
+                        <div class="col-sm-7">
+
+                            <select id="modal-type" class="form-control">
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="Cover">
+                        <div class="col-sm-3 control-label">新闻封面</div>
+                        <div class="col-sm-7">
+                            <input @change="upload" @click="clearFile" multiple="multiple" type="file" ref="file" id="modal-images">
+                        </div>
+                    </div>
+                    <div class="form-group" id="fabu">
+                        <div class="col-sm-3 control-label">发布时间</div>
+                        <div class="col-sm-7">
+                            <input readonly id="modal-createTime" name="modal-name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group" id="xiugai">
+                        <div class="col-sm-3 control-label">修改时间</div>
+                        <div class="col-sm-7">
+                            <input readonly id="modal-modifyTime" name="modal-name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group" id="dianzan">
+                        <div class="col-sm-3 control-label">点赞数</div>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-likeNum" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group" id="pinglun">
+                        <div class="col-sm-3 control-label">评论数</div>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-comNum" class="form-control" readonly>
+                        </div>
+
+                    </div>
+                    <div class="form-group" id="shoucang">
+                        <div class="col-sm-3 control-label">收藏数</div>
+                        <div class="col-sm-7">
+                            <input type="text" id="modal-colNum" class="form-control" readonly>
+                        </div>
+
+                    </div>
+                    <div id="editor" style="min-height: 300px">
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button id="saveBtn" type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/element/index.js"></script>
+<script src="../js/quill.js"></script>
+
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type,//success(成功)，warning (警告)，error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+
+    let quill = new Quill('#editor', {
+        modules: {
+            toolbar: {
+                container: [
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                    [{'font': []}],
+                    ['bold', 'italic', 'underline', 'strike'],//字体样式
+                    [{'align': []}],//对齐方式
+                    ['blockquote', 'code-block'],//文本块 代码块
+                    [{'color': []}, {'backgroud': []}],//字体颜色 背景颜色
+                    ['clean'],
+                    ['image', 'link', 'video']
+                ]
+            }
+        },
+        theme: 'snow'
+    });
+    let wrapper = new Vue({
+        el: "#wrapper",
+        data: {
+            orderList: [{
+                id: "0",
+                name:"点赞数"
+            },
+                {
+                    id: "1",
+                    name: "评论数"
+                },
+                {
+                    id: "2",
+                    name: "收藏数"
+                },
+
+            ],
+            pageInfo1: {},
+            preActive1: true,
+            nextActive1: true,
+            CHANGE:1,
+            Start:null,
+            End:null,
+            order:4,
+            Leibie: 0,
+            activityClass:[],
+            newId: 0,
+            comNum: 0,
+            comList: [],
+            colNum: 0,
+            colList: [],
+            likeNum: 0,
+            likeList: [],
+            admin: {},
+            name: '',
+            objs: [],
+            pageInfo: {},
+            preActive: true,
+            nextActive: true,
+            entity: {},
+            newsClass: [],
+            flag: 1,
+        },
+        created: function () {
+            this.admin = JSON.parse(localStorage.getItem('admin'));
+            this.getClass();
+            this.getType();
+            this.loadTable(1);
+        },
+        methods: {
+            JIANSUO(pageNum){
+                this.CHANGE=0;
+                if (this.End != null) {
+                    this.End = this.End.replace('T', ' ').replace('/', '-');
+                    console.log(this.End)
+
+                }
+                if (this.Start != null) {
+
+                    this.Start= this.Start.replace('T', ' ').replace('/', '-');
+                    console.log(this.Start)
+                }
+                let order = this.order;
+                let type = this.Leibie;
+                let Start=this.Start;
+                let End=this.End;
+                axios.get("/news/key/" +order+"/"+ type+"?pageNum="+pageNum+"&start="+Start+"&end="+End).then(res => {
+                    if (res.data.code === '0') {
+                        this.objs = res.data.data.list;
+                        this.pageInfo1 = res.data.data;
+                        this.preActive1 = !(this.pageInfo1.hasPreviousPage);
+                        this.nextActive1 = !(this.pageInfo1.hasNextPage);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            getType() {
+                axios.get("/newstype/findnewsTypes").then(res => {
+                    if (res.data.code === '0') {
+                        this.activityClass = res.data.data;
+                        console.log(this.activityClass)
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            logout() {
+                this.$confirm('确认退出登录? ', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function () {
+                    axios.get("/admin/logout").then(res => {
+                        if (res.data.code === "0") {
+                            window.location = '/end/page/login.html';
+                        }
+                    });
+                }).catch(function () {
+                    console.log("取消成功!");
+                });
+            },
+            loadTable(pageNum) {
+                let name = this.name === '' ? 'all' : this.name;
+                axios.get("/news/page/" + name + "?pageNum=" + pageNum).then(res => {
+                    if (res.data.code === '0') {
+                        this.objs = res.data.data.list;
+                        this.pageInfo = res.data.data;
+
+                        this.preActive = !(this.pageInfo.hasPreviousPage);
+                        this.nextActive = !(this.pageInfo.hasNextPage);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            detail_like(id, likeNum) {
+                this.likeNum = likeNum;
+                axios.get("/likeorcol/detail/" + id + "/0").then(res => {
+                    if (res.data.code === "0") {
+                        this.likeList = res.data.data;
+
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+                $('#like_mod').modal('show');
+
+            },
+            detail_col(id, colNum) {
+                this.colNum = colNum;
+                axios.get("/likeorcol/detail/" + id + "/1").then(res => {
+                    if (res.data.code === "0") {
+                        this.colList = res.data.data;
+
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+                $('#col_mod').modal('show');
+            },
+            detail_com(id, comNum) {
+                this.newsId = id;
+                this.comNum = comNum;
+                axios.get("/comment/commentList/" + id).then(res => {
+                    if (res.data.code === "0") {
+                        this.comList = res.data.data;
+
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+                $('#com_mod').modal('show');
+            },
+            delcom(id) {
+                let _this = this;
+                this.$confirm('确认删除? ', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function () {
+                    axios.delete("/comment/delete/" + id).then(res => {
+                        if (res.data.code === "0") {
+                            msg('success', '删除成功');
+                            _this.loadTable(1);
+                            _this.detail_com(_this.newsId, _this.comNum-1);
+
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function () {
+                    console.log("取消成功!");
+                });
+            },
+            getClass() {
+                axios.get("/newstype/findnewsTypes").then(res => {
+                    if (res.data.code === '0') {
+                        this.newsClass = res.data.data;
+                        console.log(this.newsClass)
+                        var obj = document.getElementById('modal-type');
+                        Object.keys(this.newsClass).forEach(e => {
+                            obj.options.add(new Option(this.newsClass[e].name, this.newsClass[e].id));
+                        })
+
+
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+
+
+            },
+            add() {
+                this.entity = {};
+                $('#modal-id').val('');
+                $('#modal-name').val('');
+                $('#modal-type').val('');
+                $('#modal-images').val('');
+
+
+                document.getElementById('dianzan').hidden = true;
+                document.getElementById('pinglun').hidden = true;
+                document.getElementById('shoucang').hidden = true;
+                document.getElementById('fabu').hidden = true;
+                document.getElementById('xiugai').hidden = true;
+                document.getElementById('author').hidden = true;
+
+                quill.root.innerHTML = '';
+                $('#mod').modal('show');
+            },
+
+            init(o) {
+                $('#modal-adminId').val(o.adminId);
+                $('#modal-id').val(o.id);
+                $('#modal-name').val(o.name);
+                $('#modal-type').val(o.typeId);
+                $('#modal-colNum').val(o.colNum);
+                $('#modal-comNum').val(o.comNum);
+                $('#modal-likeNum').val(o.likeNum);
+                $('#modal-modifyTime').val(o.modifyTime);
+                $('#modal-createTime').val(o.createTime);
+                quill.root.innerHTML = o.content;
+                $('#mod').modal('show');
+            },
+            del(id) {
+                let _this = this;
+                this.$confirm('确认删除? ', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function () {
+                    axios.delete("/news/delete/" + id).then(res => {
+                        if (res.data.code === "0") {
+                            msg('success', '删除成功');
+                            _this.loadTable(1);
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function () {
+                    console.log("取消成功!");
+                });
+            },
+            cancel(){
+                $('#imageModal').modal('hide');
+            },
+            look(id){
+                $("#view-img").empty();
+                $("#view-img").append($(`<img id="img-id" src="/files/download/${id}" style="width:400px;margin-bottom:5px">`));
+                $('#imageModal').modal('show');
+            }
+
+
+        }
+    });
+    let Cover=new Vue({
+        el: "#Cover",
+        data: {
+            fileName:'',
+            originalName:'',
+        },
+        methods:{
+            //上传文件
+            upload: function () {
+                let files = this.$refs.file.files;
+                for (let i = 0; i < files.length; i++) {
+                    let formData = new FormData();
+                    formData.append("file", files[i]);
+                    axios.post('/files/upload', formData, {'Content-Type': 'multipart/form-data'}).then(res => {
+                        if (res.data.code === "0") {
+                            msg('success', '上传成功');
+                            this.fileName=res.data.data.fileName;
+                            this.originalName=res.data.data.originalName;
+                        } else {
+
+                            msg('error', res.data.msg);
+
+                        }
+                    });
+                }
+            },
+            clearFile(){
+                this.fileName='';
+                this.originalName='';
+            }
+
+        }
+
+    });
+    $('#saveBtn').click(function () {
+
+        const entity = wrapper.$data.entity;
+        entity.content = quill.root.innerHTML;
+        entity.name = $('#modal-name').val();
+        entity.typeId = $('#modal-type').val();
+       entity.fileName= Cover.$data.fileName;
+        entity.originalName= Cover.$data.originalName;
+        if (!$('#modal-id').val()) {
+            axios.post("/news/add/" + JSON.parse(localStorage.getItem('admin')).id, entity).then(res => {
+                if (res.data.code === "0") {
+                    msg('success', '添加成功');
+                    $('#mod').modal('hide');
+                    wrapper.loadTable(1);
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+        } else {
+            entity.id = $('#modal-id').val();
+            axios.put("/news/modify", entity).then(res => {
+                if (res.data.code === "0") {
+                    msg('success', '更新成功');
+                    $('#mod').modal('hide');
+                    wrapper.loadTable(1);
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+        }
+    })
+
+
+</script>
+</body>
+</html>

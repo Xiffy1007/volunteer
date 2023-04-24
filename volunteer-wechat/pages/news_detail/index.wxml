@@ -1,0 +1,44 @@
+<!--pages/news_detail/index.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
+<view style="background-color: white;margin: 20rpx 0;">
+	<view class="news_name">{{news.name}}</view>
+	<view class="news_content">
+		<template is="wxParse" data="{{wxParseData:content.nodes}}" />
+	</view>
+	<view class="tool">
+		<view class="pinlun">
+			<image src="../../icons/comment.png" bindtap="modalinput" mode="widthFix" style="width: 15%;" />
+			<view class='title'>{{commentList.length}}</view>
+		</view>
+		<modal hidden="{{hiddenmodalput}}" title="请输入评论" confirm-text="提交" cancel-text="取消" bindcancel="modalinput" bindconfirm="confirm">
+			<!-- 这里可以自由选择你的输入框类型<input type='text' placeholder="请输入内容" auto-focus/> -->
+			<textarea placeholder="请输入评论内容" bindinput="comment" auto-focus="true" maxlength="200" value="{{judge}}">
+		</textarea>
+			<view>
+				<text style="float: right">{{currentWord}}/{{maxWord}}(最多可输入200字)</text>
+			</view>
+		</modal>
+
+		<view style="opacity:{{0.8}}" class="dianzan">
+			<image class="dianzantu" src="../../icons/_like.png" bindtap="praise" wx:if="{{showlike == true}}" mode="widthFix" style="width: 15%;" />
+			<image class="dianzantu" src="../../icons/like.png" bindtap="praise" wx:else mode="widthFix" style="width: 15%;" />
+			<view class='title'>{{news.likeNum}}</view>
+		</view>
+
+		<view style="opacity:{{0.8}}" class="shoucang">
+			<image class="dianzantu" src="../../icons/_col.png" bindtap="collect" wx:if="{{showcol == true}}" mode="widthFix" style="width: 15%;" />
+			<image class="dianzantu" src="../../icons/col.png" bindtap="collect" wx:else mode="widthFix" style="width: 15%;" />
+			<view class='title'>{{news.colNum}}</view>
+		</view>
+	</view>
+</view>
+<view class="comment" wx:for="{{commentList}}" wx:key="id">
+	<navigator class="name" url="/pages/userinfo/index?id={{item.userId}}">
+		<image wx:if="{{item.sex==0}}" src="../../icons/girl.png" ></image>
+		<image wx:if="{{item.sex==1}}"  src="../../icons/boy.png"></image>
+		<view wx:if="{{item.userId==userinfo.id}}" class="nt">我说的:</view>
+		<view wx:if="{{item.userId!=userinfo.id}}" class="nt"> {{item.userName}}:</view>
+	</navigator>
+	<vide style="color: black;padding-left: 50rpx;margin: 0 80rpx;display: flex;">{{item.content}}</vide>
+	<view style="text-align: right;margin: 20rpx;font-size: 20rpx;color: gray;padding-top: 10rpx;">{{item.createTime}}</view>
+</view>

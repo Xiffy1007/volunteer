@@ -1,0 +1,15 @@
+<!--pages/notice_detail/index.wxml-->
+
+<import src="../../wxParse/wxParse.wxml"/> 
+<!--标题-->
+<view class="detail">
+<image src="../../icons/送达公告.png"></image>
+<view style="font-weight: 600;color: var(--themeColor);font-size: 50rpx;margin-left: 30rpx;margin-top: 40rpx;">{{notice.name}}</view>
+<!--时间-->
+<view style="border-bottom: 1px solid #ededed;padding: 25rpx 0;color: gray;font-size: 25rpx;margin-left: 30rpx;">{{notice.createTime}}</view>
+<!--内容-->
+<view style="margin: 40rpx;text-indent: 2em;">
+<template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+</view>
+</view>
+

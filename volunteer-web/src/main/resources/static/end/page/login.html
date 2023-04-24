@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body style="background-color: #d4e1d5">
+<div id="app" class="container" v-cloak>
+    <div class="row text-center" style="padding-top: 100px;">
+        <div class="col-md-12">
+            <h2>江大青协志愿管理服务平台</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <div class="panel-body">
+                <form role="form">
+                    <hr/>
+                    <br/>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                        <input type="text" class="form-control" v-model="admin.adminName" placeholder="用户名"/>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" v-model="admin.password" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-inline"></label>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="javascript:void(0)" @click="login" class="btn btn-primary">登录</a>
+                    </div>
+                    <hr/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            admin:{
+                adminName:"",
+                password:""
+            }
+        },
+        created:function (){
+
+        },
+        methods:{
+            login(){
+                if(!this.admin.adminName){
+                    alert("请输入用户名");
+                    return;
+                }
+                if (!this.admin.password){
+                    alert("请输入密码");
+                    return;
+                }
+                axios.post('/admin/login',this.admin).then(res=>{
+                    if(res.data.code==='0'){
+                        localStorage.setItem('admin',JSON.stringify(res.data.data));
+                        location.href='/end/page/index.html';
+                    }else{
+                        alert(res.data.msg);
+                    }
+                });
+            },
+            reset(){
+                if(!this.admin.name){
+                    alert("请输入用户名");
+                    return;
+                }
+                axios.post('/restPassword',this.user).then(res=>{
+                    if(res.data.code==='0'){
+                        alert("重置密码成功,密码重置为123456");
+                    }else{
+                        alert(res.data.msg);
+                    }
+                });
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

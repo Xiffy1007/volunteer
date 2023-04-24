@@ -1,0 +1,43 @@
+.order_main .order_item {
+  padding: 20rpx;
+  border-bottom: 10rpx solid #ededed;
+  color: #666;
+}
+.order_item navigator{
+  height: 100rpx;
+}
+.order_no_row {
+  display: flex;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}
+.p1{
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex: 8;
+  margin-right: 30rpx;
+}
+.order_no_row image{
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 20rpx;
+  opacity: 0.8;
+  flex: 1;
+}
+.p{
+  text-align: center;
+  margin-top: 300rpx;
+  font-size: 40rpx;
+  color:grey;
+
+  
+}
+.p image{
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.2;
+
+}

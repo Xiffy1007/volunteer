@@ -1,0 +1,34 @@
+page{
+  background-color: var(--themeColor);
+}
+.content{
+  height: 95vh;
+  background-color: white;
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 20rpx;
+  position: relative;
+}
+.detail image{
+  width: 200rpx;
+  height: 150rpx;
+  position: absolute;
+z-index: 1;
+display: block;
+opacity: 0.4;
+right: 0;
+margin: 100rpx 30rpx;
+}
+.imgList{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.imgList .img{
+  width: 150rpx;
+  height: 150rpx;
+  display: block;
+
+ 
+}

@@ -1,0 +1,50 @@
+<view class="cates">
+  <!-- 搜索框开始 -->
+  <SearchBar searchType="{{searchType}}"></SearchBar>
+  <!-- 搜索框结束 -->
+  <Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+
+    <view class="cates_container">
+      <!-- 左侧菜单 开始 -->
+      <!-- 纵向滚动 scroll-y -->
+      <scroll-view scroll-y class="left_menu">
+        <view class="menu_item {{index==currentIndex ? 'active':''}}" wx:for="{{leftMenuList}}" wx:key="*this" data-index="{{index}}" bindtap="handleMenuItemChange">{{item.name}}
+        </view>
+      </scroll-view>
+      <!-- 左侧菜单 结束 -->
+
+      <!-- 右侧活动数据 开始 -->
+      <scroll-view scroll-y class="right_content" scroll-top="{{scrollTop}}">
+        <view class="productType">
+          <view class="product_list" wx:for="{{orders}}" wx:for-item="product" wx:key="id">
+            <navigator url="/pages/activity_detail/index?id={{product.id}}">
+            <view class="right">
+            <image src="../../icons/热门活动.png" wx:if="{{tabs[0].isActive==true}}"></image>
+            <image src="../../icons/活动_活动管理.png" wx:if="{{tabs[1].isActive==true}}"></image>
+            <image src="../../icons/节庆活动.png" wx:if="{{tabs[2].isActive==true}}"></image>
+            <view class="other" style="margin: 20rpx 0;border-bottom: 1rpx solid grey;padding-bottom: 10rpx;font-size: 20rpx;">
+              <view style="color: grey;font-size: 30rpx;color: var(--themeColor);">{{product.name}}</view>
+              <view style="color: grey;font-size: 27rpx;color: var(--themeColor);">查看 ></view>
+            </view>
+              <view class="content">{{product.content}}</view>
+              <view class="other">
+               <view>负责人:</view>
+               <view>{{product.leaderName}}</view>
+              </view>
+              <view class="other">
+               <view>志愿时长:</view>
+               <view> {{product.duration}}</view>
+               </view>
+              <view class="other">
+              <view>活动时间:</view>
+              <view>{{product.actTime}}</view>
+              </view>
+            </view>
+          </navigator>
+          </view>
+        </view>
+      </scroll-view>
+      <!-- 右侧活动数据 结束 -->
+    </view>
+  </Tabs>
+</view>

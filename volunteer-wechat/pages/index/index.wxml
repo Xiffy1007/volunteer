@@ -1,0 +1,69 @@
+<!-- 轮播图开始 -->
+<view class="index_swiper">
+	<swiper autoplay circular indicator-dots>
+		<swiper-item wx:for="{{newsList}}" wx:for-item="swiper" >
+			<navigator url="/pages/news_detail/index?id={{swiper}}">
+				<image mode="scaleToFill" src="http://localhost:8088/files/download/{{swiper}}"></image>
+			</navigator>
+		</swiper-item>
+	</swiper>
+</view>
+<!-- 轮播图结束 -->
+<view style="background-color: #ededed;">
+<view class="tool">
+		<navigator wx:if="{{!userinfo}}" url="../login/index">
+			<view class="iconfont">
+				<image src="../../icons/材料审核中.png"></image>
+			</view>
+			<view class="s1">我的审核</view>
+		</navigator>
+		<navigator  wx:if="{{userinfo}}" url="../check_result/index">
+			<view class="iconfont">
+				<image src="../../icons/材料审核中.png"></image>
+			</view>
+			<view class="s1">我的审核</view>
+		</navigator>
+		<navigator url="../duration/index">
+			<view class="iconfont">
+				<image src="../../icons/当志愿者 (1).png"></image>
+			</view>
+			<view class="s1">志愿时长</view>
+		</navigator>
+		<navigator url="../ranking/index">
+			<view class="iconfont">
+				<image src="../../icons/排行榜2.png"></image>
+			</view>
+			<view class="s1">排行榜</view>
+		</navigator>
+		<navigator url="../notice/index">
+			<view class="iconfont">
+				<image src="../../icons/wnt_公告.png"></image>
+			</view>
+			<view class="s1">公告</view>
+		</navigator>
+</view>
+</view>
+<view class="product_title"><image src="../../icons/志愿招募.png"></image><view>公告栏</view></view>
+<view class="g1">
+    <view style="font-size: 40rpx;color: white;font-weight: 600;height: 300rpx;line-height: 100rpx;padding-top: 40rpx;margin-left: 30rpx;">公告</view>
+		<view class="g2">
+			<navigator  wx:for="{{noticeList}}" wx:key="id" url="/pages/notice_detail/index?id={{item.id}}" >{{item.name}}</navigator>
+   </view>
+</view>
+
+<!-- 商品热卖推荐 开始 -->
+<view class="index_hotProduct">
+	<view class="product_title"><image src="../../icons/志愿招募.png"></image><view> 志愿活动</view></view> 
+	<view class="product_list">
+		<view class="product_detail"wx:for="{{activityList}}" wx:for-item="hotProduct" wx:key="id">
+				<navigator url="/pages/activity_detail/index?id={{hotProduct.id}}" class="r1">
+				<image  src="{{backimage[index].data}}"></image>
+				<view class="con"></view>
+				<view class="product_name">{{hotProduct.name}}</view>
+				<view class="product_name">{{hotProduct.createTime}}</view>
+				<button size="mini" type="warn">查看详情</button>
+			</navigator>
+		</view>
+	</view>
+</view>
+<!-- 商品热卖推荐 结束 -->

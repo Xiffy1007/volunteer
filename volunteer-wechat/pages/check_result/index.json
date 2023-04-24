@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "SearchBar":"/components/SearchBar/SearchBar",
+    "Tabs":"../../components/Tabs/Tabs"
+  },
+  "navigationBarTitleText": "我的审核",
+  "enablePullDownRefresh": true
+}

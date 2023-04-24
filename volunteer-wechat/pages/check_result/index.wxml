@@ -1,0 +1,19 @@
+<Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+  <view class="order_main">
+    <view wx:if="{{total==0}}" class="p">
+    <image src="../../icons/暂无数据.png"></image>
+    <view style="opacity: 0.4;">暂无审核</view>
+    </view>
+    <view wx:for="{{checkList}}" wx:key="id" class="order_item">
+      <navigator url="/pages/check_detail/index?id={{item.id}}">
+        <view class="order_no_row">
+          <image src="../../icons/待审核.png" wx:if="{{item.state==0}}"></image>
+          <image src="../../icons/已审核.png" wx:if="{{item.state==1}}"></image>
+          <image src="../../icons/审核未通过.png" wx:if="{{item.state==2}}"></image>
+          <view class="p1">{{item.content}}</view>
+        </view>
+      </navigator>
+      <view style="display:flex;float: right;font-size: 25rpx;color: gray;margin-right: 10rpx;">{{item.createTime}}</view>
+    </view>
+  </view>
+</Tabs>

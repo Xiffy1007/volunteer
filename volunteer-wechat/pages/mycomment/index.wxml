@@ -1,0 +1,23 @@
+<view class="order_main">
+	<view wx:if="{{totalCom==0}}" class="p">
+    <image src="../../icons/暂无数据.png"></image>
+    <view style="opacity: 0.4;">您还没有任何评论</view>
+    </view>
+	<view wx:for="{{CommentsList}}" wx:key="id" class="order_item" wx:if="{{totalCom!=0}}">
+		<view class="part">
+			<navigator url="/pages/news_detail/index?id={{item.newsId}}">
+				<view class="order_no_row">
+					<view class="order_no_value">
+						<image src="../../icons/评论1.png"></image>{{item.content}}
+					</view>
+					<view class="order_time_value">查看详情 ></view>
+				</view>
+			</navigator>
+			<view class="order_time_row">
+				<view style="margin-left: 40rpx;margin-top: 10rpx;"><button bindtap="delMycom" data-index="{{item.id}}" size="mini">删除</button></view>
+				<view class="order_time_text">{{item.createTime}}</view>
+			</view>
+		</view>
+	</view>
+
+</view>

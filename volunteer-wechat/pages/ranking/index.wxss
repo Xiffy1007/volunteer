@@ -1,0 +1,31 @@
+/* pages/ranking/index.wxss */
+page{
+  background:#b6e0d2;
+}
+.title{
+  height: 300rpx;
+  text-align: center;
+  justify-content: center;
+  margin-top:50rpx;
+}
+.title image{
+  width: 200rpx;
+  height: 200rpx;
+  
+}
+
+.order_main .order_item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+  color: #666;
+}
+.order_main .order_item .order_no_row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+.order_no_text image{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+}

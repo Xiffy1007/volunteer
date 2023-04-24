@@ -1,0 +1,66 @@
+/* pages/news_detail/index.wxss */
+page{
+	background-color: #ededed;
+}
+.news_name{
+	font-weight: 600;
+	color: var(--themeColor);
+	font-size: large;
+	margin: 0 20rpx;
+	padding-top: 20rpx;
+	}
+	.news_content{
+	font-weight: 400;
+	margin: 0 20rpx;
+	text-indent: 2em;
+	}
+	.tool{
+		 display: flex;
+		 padding: 20rpx 10rpx;
+
+	}
+	.pinlun{
+	width: 400rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	}
+	.dianzan{
+	width: 400rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	}
+	.shoucang{
+	width: 400rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	}
+	.title{
+		 padding-left: 10rpx;
+		 color:grey;
+	}
+	.comment{
+	background-color: white;
+	height:auto;
+	width: 100%;
+	border-bottom: 1px solid #ededed;
+}
+.name{
+	display: flex;
+	width: 100%;
+	margin: 20rpx;
+}
+.name image{
+	width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+}
+.nt{
+	margin-left: 20rpx;
+	margin-top: 20rpx;
+	color: #5c5b60;
+	font-size: 30rpx;
+}

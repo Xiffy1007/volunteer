@@ -1,0 +1,26 @@
+<view class="order_main">
+<view class="title">
+<image src="../../icons/日出.png"></image>
+<view style="display: flex;justify-content: center;">
+我的信用：
+<view wx:if="{{totalcredit<=80}}" style="color: red;">{{totalcredit}}</view>
+<view wx:else>{{totalcredit}}</view>
+</view>
+<view style="margin: 30rpx 0;font-size: 25rpx;color: rgb(68, 9, 9);opacity: 0.5;">提示：若信用值低于10将影响后续活动的参加噢！</view>
+</view>
+<view wx:for="{{creditsList}}" wx:key="id" class="order_item">
+	<navigator url="/pages/activity_detail/index?id={{item.id}}">
+
+		<view class="order_no_row">
+			<view class="order_no_text">详情</view>
+			<view class="order_no_value">{{item.credit}}</view>
+		</view>
+
+		<view class="order_time_row">
+			<view class="order_time_text">时间</view>
+			<view class="order_time_value">{{item.checkTime}}</view>
+		</view>
+	</navigator>
+</view>
+
+</view>

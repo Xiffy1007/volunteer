@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>活动完成度</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/basic.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/my.css" rel="stylesheet">
+    <link href="../css/element/index.css" rel="stylesheet">
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper" v-cloak >
+    <nav class="navbar navbar-default navbar-cls-top" style="margin-bottom: 0">
+        <div class=navbar-header">
+            <a class="navbar-brand" href=" index.html">江大青协志愿管理平台</a>
+        </div>
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn- info" @click="logout" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href= "adminInfo.html" class="btn btn-info" title="跳转到个人信息">
+                <i class="fa fa-user fa-2x"></i>
+            </a>
+        </div>
+        <div class="header-right" style="padding-top: 25px">
+            欢迎您，{{admin.adminName}}
+        </div>
+    </nav>
+    <nav class= "navbar-default navbar-side">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a  href="index.html"><i class="fa fa-bar-chart"></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-yelp"></i>信息展示<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li><a href="userInfo.html"><i class="fa fa-users"></i>用户信息</a> </li>
+                        <li><a href="#"><i class="fa fa-heart"></i>志愿活动<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="typeInfo.html"><i class="fa fa-table"></i>活动类别</a> </li>
+                                <li><a href="activity.html"><i class="fa fa-file-text"></i>活动详情</a> </li>
+                                <li><a href="signup.html"><i class="fa fa-table"></i>报名详情</a> </li>
+
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-check-square"></i>审核<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="check.html"><i class="fa fa-check-square-o"></i>活动审核</a></li>
+                                <li><a href="filecheck.html"><i class="fa fa-file-image-o"></i>材料审核</a> </li>
+                            </ul>
+                        </li>
+
+
+                        <li><a href="#"><i class="fa fa-newspaper-o"></i>新闻<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="newstypeInfo.html"><i class="fa fa-table"></i>新闻类别</a> </li>
+                                <li><a href="allnews.html"><i class="fa fa-file-text-o"></i>新闻详情</a> </li>
+                                <li><a href="mynews.html"><i class="fa fa-book"></i>我的新闻</a> </li>
+                                <li><a href="commentInfo.html"><i class="fa fa-comments"></i>评论信息</a> </li>
+                            </ul>
+                        </li>
+                        <li><a href= "notice.html"><i class="fa fa-bullhorn"></i>公告信息</a> </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-pie-chart"></i>数据分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li><a class="active-menu" href="completeness.html"><i class="fa fa-check-circle"></i>活动完成度</a></li>
+                        <li><a href="rank.html"><i class="fa fa-signal"></i>用户排名</a></li>
+                    </ul>
+
+                </li>
+                <li><a href="#"><i class="fa fa-cogs"></i>我的<span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level collapse in">
+                        <li><a href="adminInfo.html"><i class="fa fa-user"></i>个人信息</a> </li>
+                        <li><a href="updatePassword.html"><i class="fa fa-edit"></i>修改密码</a> </li>
+                        <li><a href="javascript:void(0)" @click="logout"><i class="fa fa-power-off"></i>退出登录</a> </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="main-box mb-olivedrab">
+                        <i class="fa fa-user"></i>
+                        <span style="margin-left: 20px;">用户总数：{{totalUser}}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="main-box mb-darkseagreen">
+                        <i class="fa fa-align-center"></i>
+                        <span style="margin-left: 20px;">活动种类数：{{totalActClass}}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="main-box mb-burlywood">
+                        <i class="fa fa-heart"></i>
+                        <span style="margin-left: 20px;">活动总数：{{totalacts}}</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            分类活动完成度
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="nx-table-header">
+                                </div>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>活动种类ID</th>
+                                        <th>活动种类</th>
+                                        <th>活动参与人数</th>
+                                        <th>活动完成人数</th>
+                                        <th>活动完成度</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody v-for="obj in objs">
+                                    <tr>
+                                        <td>{{obj.id}}</td>
+                                        <td>{{obj.name}}</td>
+                                        <td>{{obj.cyNum}}</td>
+                                        <td>{{obj.comNum}}</td>
+                                        <td>{{obj.percent}}%</td>
+
+
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            班级活动完成度
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="nx-table-header">
+                                </div>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>班级</th>
+                                        <th>活动参与人数</th>
+                                        <th>活动完成人数</th>
+                                        <th>活动完成度</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody v-for="obj in objsclass">
+                                    <tr>
+                                        <td>{{obj.classinfo}}</td>
+                                        <td>{{obj.cyNum}}</td>
+                                        <td>{{obj.comNum}}</td>
+                                        <td>{{obj.percent}}%</td>
+
+
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/element/index.js"></script>
+<script>
+    new Vue({
+        el:"#wrapper",
+        data:{
+            objs:{},
+            objsclass:{},
+            admin:{},
+            totalUser:0,//用户总数
+            totalActClass:0,//活动种类
+            totalacts:0,//总活动
+
+
+        },
+        created:function () {
+            this.admin = JSON.parse(localStorage.getItem('admin'));
+            axios.get("/echarts/getTotal").then(res => {
+                if (res.data.code === '0') {
+                    let map = res.data.data;
+                    this.totalUser = map['totalUser'];
+                    this.totalacts=map['totalacts'];
+                    this.totalActClass=map['totalActClass'];
+                }
+            });
+            axios.get("/type/findcom").then(res => {
+                if (res.data.code === '0') {
+                    this.objs = res.data.data;
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+            axios.get("/type/findclasscom").then(res => {
+                if (res.data.code === '0') {
+                    this.objsclass= res.data.data;
+                } else {
+                    msg('error', res.data.msg);
+                }
+            });
+        },
+        methods: {
+            logout() {
+                this.$confirm('确认退出登录? ', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function () {
+                    axios.get("/admin/logout").then(res => {
+                        if (res.data.code === "0") {
+                            window.location = '/end/page/login.html';
+                        }
+                    });
+                }).catch(function () {
+                    console.log("取消成功!");
+                });
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

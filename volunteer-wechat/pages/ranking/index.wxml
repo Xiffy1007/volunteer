@@ -1,0 +1,26 @@
+<!--pages/ranking/index.wxml-->
+<view class="title">
+	<image src="../../icons/排名.png"></image>
+	<view  class="t2" wx:if="{{flag}}">我的排名：{{myrank}}</view>
+</view>
+<view class="order_main">
+	<view wx:for="{{ranklist}}" wx:key="id" class="order_item">
+		<navigator url="/pages/userinfo/index?id={{item.id}}">
+			<view class="order_no_row">
+				<view class="order_no_text">
+					<view style="display: flex;font-size: 40rpx;color:#666;" wx:if="{{index==0||index==1||index==2}}">{{index+1}}
+						<image wx:if="{{index==0}}" src="../../icons/金牌.png"></image>
+						<image wx:if="{{index==1}}" src="../../icons/银牌.png"></image>
+						<image wx:if="{{index==2}}" mode="widthFix" src="../../icons/铜牌.png"></image>
+					</view>
+					<view wx:else style="font-size: 30rpx;color: grey;">{{index+1}}</view>
+				</view>
+
+				<view class="order_no_value" wx:if="{{userinfo.id!=item.id}}">{{item.userName}}</view>
+				<view class="order_no_value" wx:if="{{userinfo.id==item.id}}">我</view>
+				
+			</view>
+		</navigator>
+	</view>
+
+</view>

@@ -1,0 +1,72 @@
+page{
+  background-color: #edeced;
+  
+}
+.order_main .order_item {
+  padding: 10rpx 0;
+}
+.part{
+  height: 100rpx;
+  width: 100%;
+  height: 200rpx;
+  background-color: white;
+  display: flex;
+}
+.order_item navigator{
+ flex: 4;
+
+}
+
+.order_item navigator image{
+width: 60rpx;
+height: 60rpx;
+margin-right: 10rpx;
+
+}
+.order_time_row button{
+  background-color: var(--themeColor);
+  color: white;
+  font-weight: 400;
+  margin: 30rpx 40rpx;
+  
+  
+}
+.order_main .order_item .order_no_row {
+  padding-top: 40rpx;
+  height: 200rpx;
+}
+
+.order_main .order_item .order_time_row {
+  flex: 2;
+  font-size: 25rpx;
+  color:grey;
+}
+.order_no_value{
+  margin-left: 20rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  
+  
+}
+.order_time_value{
+  font-size: 25rpx;
+  color:grey;
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+}
+.p{
+  text-align: center;
+  margin-top: 300rpx;
+  font-size: 40rpx;
+  color:grey;
+
+  
+}
+.p image{
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.2;
+
+}

@@ -1,0 +1,65 @@
+page{
+  background: #eee;
+}
+
+.baseInfo{
+  padding:20rpx 10rpx;
+}
+
+.baseInfo text{
+  font-size: 28rpx;
+  color: #6f6f6f;
+}
+
+.userinfolist{
+  color: #6f6f6f;
+  font-size: 32rpx;
+}
+
+.avatar{
+	margin-top: 60rpx;
+	margin-bottom: 40rpx;
+	width: 80px;
+	height: 80px;
+	padding:0;
+	background: none;
+}
+
+.avatar image{
+	width: 80px;
+	height: 80px;
+	border-radius: 100px;
+}
+
+
+
+.singlelist{
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.singlelist input{
+  text-align:right;
+}
+.sex{
+  background: #fff;
+}
+.radio radio{
+  margin-left: 30rpx;
+}
+ 
+.submitbtn{
+  background-color: #27b485ad;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+	width: 100%;
+	
+	
+}
+ 

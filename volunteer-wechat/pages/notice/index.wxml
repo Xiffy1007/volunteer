@@ -1,0 +1,16 @@
+<view class="order_main">
+
+	<view wx:for="{{noticeList}}" wx:key="id" class="order_item">
+		<navigator url="/pages/notice_detail/index?id={{item.id}}">
+			<view class="title"><image src="../../icons/公告.png"></image>查看详情  ></view>
+			<view class="order_no_row">
+				<view class="order_no_value">{{item.name}}</view>
+			</view>
+			<view class="order_time_row">
+				<view class="order_time_text">发布日期</view>
+				<view class="order_time_value">{{item.createTime}}</view>
+			</view>
+		</navigator>
+	</view>
+
+</view>

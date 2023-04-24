@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/basic.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/my.css" rel="stylesheet">
+    <link href="../css/element/index.css" rel="stylesheet">
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper" v-cloak >
+    <nav class="navbar navbar-default navbar-cls-top" style="margin-bottom: 0">
+        <div class=navbar-header">
+            <a class="navbar-brand" href=" index.html">江大青协志愿管理平台</a>
+        </div>
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn- info" @click="logout" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href= "accountUserInfo.html" class="btn btn-info" title="跳转到个人信息">
+                <i class="fa fa-user fa-2x"></i>
+            </a>
+        </div>
+        <div class="header-right" style="padding-top: 25px">
+            欢迎您，{{admin.adminName}}
+        </div>
+    </nav>
+    <nav class= "navbar-default navbar-side">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="index.html"><i class="fa fa-bar-chart"></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-yelp"></i>信息展示<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li><a href="userInfo.html"><i class="fa fa-users"></i>用户信息</a> </li>
+                        <li><a href="#"><i class="fa fa-heart"></i>志愿活动<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="typeInfo.html"><i class="fa fa-table"></i>活动类别</a> </li>
+                                <li><a href="activity.html"><i class="fa fa-file-text"></i>活动详情</a> </li>
+                                <li><a href="signup.html"><i class="fa fa-table"></i>报名详情</a> </li>
+
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-check-square"></i>审核<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="check.html"><i class="fa fa-check-square-o"></i>活动审核</a></li>
+                                <li><a href="filecheck.html"><i class="fa fa-file-image-o"></i>材料审核</a> </li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#"><i class="fa fa-newspaper-o"></i>新闻<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse in">
+                                <li><a href="newstypeInfo.html"><i class="fa fa-table"></i>新闻类别</a> </li>
+                                <li><a href="allnews.html"><i class="fa fa-file-text-o"></i>新闻详情</a> </li>
+                                <li><a href="mynews.html"><i class="fa fa-book"></i>我的新闻</a> </li>
+                                <li><a href="commentInfo.html"><i class="fa fa-comments"></i>评论信息</a> </li>
+                            </ul>
+                        </li>
+                        <li><a href= "notice.html"><i class="fa fa-bullhorn"></i>公告信息</a> </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-pie-chart"></i>数据分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li><a href="completeness.html"><i class="fa fa-check-circle"></i>活动完成度</a></li>
+                        <li><a href="rank.html"><i class="fa fa-signal"></i>用户排名</a></li>
+                    </ul>
+
+                </li>
+                <li><a href="#"><i class="fa fa-cogs"></i>我的<span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level collapse in">
+                        <li><a class="active-menu" href="adminInfo.html"><i class="fa fa-user"></i>个人信息</a> </li>
+                        <li><a href="updatePassword.html"><i class="fa fa-edit"></i>修改密码</a> </li>
+                        <li><a href="javascript:void(0)" @click="logout"><i class="fa fa-power-off"></i>退出登录</a> </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            个人信息
+                        </div>
+                        <div class="panel-body">
+                            <form class= "form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label">Id</div>
+                                    <div class="col-sm-7">
+                                        <input readonly="readonly" class="form-control" v-model= "entity.id">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label">姓名</div>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" v-model= "entity.adminName" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label">性别</div>
+                                    <div class="col-sm-7">
+                                        <label class= "radio-inline">
+                                            <input type="radio" value="男" v-model= "entity.sex">男
+                                        </label>
+                                        <label class= "radio-inline">
+                                            <input type="radio" value="女" v-model= "entity.sex">女
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class= "form-group">
+                                    <div class="col-sm-3 control-label">手机号</div>
+                                    <div class="col-sm-7">
+                                        <input type="tel" class="form-control" v-model= "entity.phone" placeholder="请输入手机号">
+                                    </div>
+                                </div>
+                                <div class= "form-group">
+                                    <div class="col-sm-3 control-label">邮箱</div>
+                                    <div class="col-sm-7">
+                                        <input type="email" class="form-control" v-model= "entity.email" placeholder="请输入邮箱">
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div style="text-align: center">
+                                <button type="button" class="btn btn-primary"  v-on:click= "save()">保存</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/element/index.js"></script>
+<script>
+    function msg(type,msg) {
+        Vue.prototype.$message({
+            type: type,//success(成功)，warning (警告)，error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+    new Vue({
+        el:"#wrapper",
+        data:{
+            admin:{},
+            entity:{}
+        },
+        created:function () {
+            this.admin = JSON.parse(localStorage.getItem('admin'));
+            this.entity=this.admin;
+        },
+        methods: {
+            logout(){
+                this.$confirm( '确认退出登录? ', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function() {
+                    axios.get("/admin/logout").then(res => {
+                        if (res.data.code === "0") {
+                            window.location = '/end/page/login.html';
+                        }
+                    });
+                }).catch(function(){
+                    console.log("取消成功!");
+                });
+            },
+            save(){
+                axios.put("/admin/modify", this.entity).then(res => {
+                    if (res.data.code === "0") {
+                        msg('success', '更新成功');
+                        localStorage.setItem('admin',JSON.stringify(res.data.data));
+                        this.admin = JSON.parse(localStorage.getItem('admin'));
+                        this.entity=this.admin;
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

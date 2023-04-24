@@ -1,0 +1,28 @@
+<view class="content">
+<view class="detail">
+<image src="../../icons/审核中.png" wx:if="{{check.state==0}}"></image>
+<image src="../../icons/已通过.png" wx:if="{{check.state==1}}"></image>
+<image src="../../icons/审核未通过.png" wx:if="{{check.state==2}}"></image>
+  <view style="font-weight: 600;color: var(--themeColor);font-size: 50rpx;margin-left: 30rpx;margin-top: 40rpx;"  wx:if="{{check.state==0}}">审核中</view>
+  <view style="font-weight: 600;color: var(--themeColor);font-size: 50rpx;margin-left: 30rpx;margin-top: 40rpx;"  wx:if="{{check.state==1}}">审核通过</view>
+  <view style="font-weight: 600;color: var(--themeColor);font-size: 50rpx;margin-left: 30rpx;margin-top: 40rpx;"  wx:if="{{check.state==2}}">审核未通过</view>
+  <view style="padding-top: 25rpx; color: gray;font-size: 25rpx;margin-left: 30rpx;">提交时间：{{check.createTime}}</view>
+  <view style="padding-top: 10rpx;color: gray;font-size: 25rpx;margin-left: 30rpx;"wx:if="{{check.state!=0}}">审核时间：{{check.checkTime}}</view>
+<view style="padding-top: 10rpx;color: gray;font-size: 25rpx;margin-left: 30rpx;"wx:if="{{check.state==1}}">志愿时长：{{check.duration}}h</view>
+
+</view>
+<view style="text-indent: 2em;margin: 40rpx;padding-top: 50rpx;">详情描述：{{check.content}}</view>
+<view class='imgList'>      
+	<!--点击图片可以预览-->
+  <view style="height: 150rpx;width: 150rpx;margin:0 36rpx;"wx:for='{{images}}'>
+    <image class='img' mode="aspectFit" src='{{item}}' data-index='{{index}}' bindtap='previewImg'></image>
+</view>
+</view>
+<view style="margin-left: 30rpx;margin-top: 40rpx;color: coral;" wx:if="{{check.state==2}}">
+<view>未通过原因：</view>
+<view style="margin: 10rpx auto;padding: 0 30rpx;text-indent: 2em;">{{check.question}}</view>
+</view>
+</view>
+
+
+

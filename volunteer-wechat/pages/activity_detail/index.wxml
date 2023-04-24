@@ -1,0 +1,65 @@
+<!--pages/activity_detail/index.wxml-->
+<view class="actdet">
+<view class="content">
+<view class="act">
+<view class="text">
+<view style="font-size: 50rpx;font-weight: 600;color:var(--themeColor);margin: 30rpx;">{{activity.name}}</view>
+<view style="text-align: center; margin: 10rpx 50rpx;height: 200rpx;">{{activity.content}}</view>
+<view wx:if="{{state==0}}" class="p">报名中</view>
+<view wx:if="{{state==1}}" class="p">进行中</view>
+<view wx:if="{{state==2}}" class="p">已完成</view> 
+<view class="info1">
+<view style="color:grey;font-size: 25rpx;">志愿时长：{{activity.duration}}h</view>
+<view style="color:grey;font-size: 25rpx;padding: 15rpx 0;border-bottom: 1rpx solid #ededed;">活动时间：{{activity.actTime}}——{{activity.actendTime}}</view>
+</view>
+</view>
+<view style="display: flex;">
+<view>
+<view class="info2">
+<image src="../../icons/活动1.png"></image>种类：{{activity.typeName}}
+</view>
+<view class="info2">
+<image src="../../icons/管理员.png"></image>负责人：{{activity.leaderName}}
+</view>
+</view>
+<view style="margin-left: 45rpx;">
+<view class="info2">
+<image src="../../icons/人数.png" ></image>人数：{{activity.nowNum}}/{{activity.number}}人
+</view>
+<view class="info2">
+<image src="../../icons/电话 联系方式 (1).png" ></image>联系方式：{{activity.leaderContact}}
+</view>
+</view>
+</view>
+</view>
+<view class="info3">
+	<view style="font-size: 50rpx;font-weight: 600;color:var(--themeColor);margin: 30rpx;">活动须知</view>
+	<view style="margin: 10rpx 50rpx;height: 60rpx;">关于签到：活动开始后10分钟内类请完成签到！</view>
+	<view style="margin: 10rpx 50rpx;height: 60rpx;">关于页面：若无签到请刷新页面！</view>
+	<view style="margin: 10rpx 50rpx;height: 60rpx;">关于惩罚：若未完成签到会影响阳光信用哦！</view>
+	<view style="margin: 10rpx 50rpx;height: 90rpx;">关于疑问：若有任何疑问请咨询活动负责人！</view>
+<view class="info1">
+<view style="font-size: 25rpx;color: grey;">已报名：{{activity.nowNum}}人</view>
+</view>
+<view class="info1">
+<view style="font-size: 25rpx;color: grey;">报名时间：{{activity.createTime}}——{{activity.endTime}}</view>
+</view>
+<button wx:if="{{!userinfo&&state==0}}" bindtap="signUp">报名</button>
+<button wx:if="{{userinfo&&!checkSign&&state==0}}" bindtap="signUp">报名</button>
+<button wx:if="{{userinfo&&checkSign}}">已报名</button>
+<button wx:if="{{button==1}}" bindtap="getCurrentLocal">签到</button>
+</view>
+
+<view class="order_main">
+<view style="font-size: 50rpx;font-weight: 600;color:var(--themeColor);margin: 30rpx;">报名列表</view>
+<view wx:for="{{userList}}" wx:key="id" class="order_item">
+	<navigator url="/pages/userinfo/index?id={{item.id}}">
+		<view class="order_no_row">
+			<view>{{item.userName}}</view>
+			<view>{{item.createTime}}</view>
+		</view>
+	</navigator>
+</view>
+</view>
+</view>
+</view>

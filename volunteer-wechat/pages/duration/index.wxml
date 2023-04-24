@@ -1,0 +1,25 @@
+<view class="order_main">
+<view class="title">
+<image src="../../icons/太阳 (2).png"></image>
+	<view style="font-weight: 600;color: white;font-size: 40rpx;margin: 20rpx;">我的志愿时长：</view>
+	<view class="word">{{duration}}h</view>
+</view>
+	<view wx:for="{{durationtList}}" wx:key="id" class="order_item">
+		<navigator url="/pages/activity_detail/index?id={{item.id}}">
+		<image  wx:if="{{item.dur>0}}"  src="../../icons/感觉良好.png"></image>
+		<image  wx:else src="../../icons/差评.png" style="right: 0;"></image>
+		
+
+			<view class="order_no_row">
+				<view class="order_no_text">详情</view>
+				<view wx:if="{{item.dur<=0}}" style="color: red;font-size: 35rpx;">{{item.dur}}</view>
+				<view wx:else style="color:rgb(38, 179, 38);font-size: 35rpx;">{{item.dur}}</view>
+			</view>
+
+			<view class="order_time_row">
+			{{item.checkTime}}
+			</view>
+		</navigator>
+	</view>
+
+</view>
